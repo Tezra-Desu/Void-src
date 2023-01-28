@@ -1,0 +1,29 @@
+# Template file for 'pymdown-extensions'
+pkgname=pymdown-extensions
+version=9.9
+revision=1
+build_helper="python3"
+hostmakedepends="python3-build hatchling python3-installer python3-packaging
+ python3-wheel"
+depends="python3-Markdown"
+short_desc="Extensions for Python Markdown"
+maintainer="TezraDesu"
+license="MIT"
+homepage="https://facelessuser.github.io/pymdown-extensions"
+distfiles="https://github.com/facelessuser/${pkgname}/archive/${version}.tar.gz"
+checksum=528847740696b04dd6e8adb0c9b7ba16712428940d0d8c96d4a2ddeb44e74f93
+
+do_build() {
+  python3 -m build --wheel --no-isolation
+}
+
+do_check() {
+  python3 run_tests.py
+}
+
+do_install() {
+  python3 -m installer --destdir="${DESTDIR}" dist/*whl 
+
+  install -Dm644 LICENSE.md -t "${DESTDIR}/usr/share/licenses/${pkgname}/"
+}
+

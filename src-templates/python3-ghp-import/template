@@ -1,0 +1,17 @@
+# Template file for 'python3-ghp-import'
+pkgname=python3-ghp-import
+version=2.1.0
+revision=3
+build_style="python3-module"
+hostmakedepends="git python3-setuptools"
+depends="python3"
+short_desc="Copy your docs directly to the gh-pages branch"
+maintainer="TezraDesu"
+license="custom:Tumbolia"
+homepage="https://pypi.python.org/pypi/ghp-import"
+distfiles="https://github.com/c-w/ghp-import/archive/refs/tags/${version}.tar.gz"
+checksum=69c2817e04ec6ee7cfb630696ffc8a188a30f6e0c319eda7e4312acddac95d5d
+
+post_install() {
+	install -Dm644 LICENSE "${DESTDIR}/usr/share/licenses/${pkgname}/LICENSE"
+}

@@ -1,0 +1,135 @@
+Common subdirectories: nsxiv-30/.github and patched-nsxiv/.github
+diff -Np1 nsxiv-30/config.def.h patched-nsxiv/config.def.h
+*** nsxiv-30/config.def.h	2022-06-15 10:07:46.000000000 -0400
+--- patched-nsxiv/config.def.h	2023-01-19 15:36:55.694812985 -0500
+*************** static const int WIN_HEIGHT = 600;
+*** 9,11 ****
+   */
+! static const char *DEFAULT_WIN_BG     = "white";
+  static const char *DEFAULT_WIN_FG     = "black";
+--- 9,11 ----
+   */
+! static const char *DEFAULT_WIN_BG     = "black";
+  static const char *DEFAULT_WIN_FG     = "black";
+*************** static const bool ANTI_ALIAS = true;
+*** 52,54 ****
+   */
+! static const bool ALPHA_LAYER = false;
+  
+--- 52,54 ----
+   */
+! static const bool ALPHA_LAYER = true;
+  
+*************** static const keymap_t keys[] = {
+*** 85,87 ****
+  	{ 0,            XK_q,             g_quit,               0 },
+! 	{ 0,            XK_Return,        g_switch_mode,        None },
+  	{ 0,            XK_f,             g_toggle_fullscreen,  None },
+--- 85,87 ----
+  	{ 0,            XK_q,             g_quit,               0 },
+! 	{ 0,            XK_Tab,           g_switch_mode,        None },
+  	{ 0,            XK_f,             g_toggle_fullscreen,  None },
+*************** static const keymap_t keys[] = {
+*** 93,102 ****
+  	{ 0,            XK_D,             g_remove_image,       None },
+! 	{ ControlMask,  XK_h,             g_scroll_screen,      DIR_LEFT },
+! 	{ ControlMask,  XK_Left,          g_scroll_screen,      DIR_LEFT },
+! 	{ ControlMask,  XK_j,             g_scroll_screen,      DIR_DOWN },
+! 	{ ControlMask,  XK_Down,          g_scroll_screen,      DIR_DOWN },
+! 	{ ControlMask,  XK_k,             g_scroll_screen,      DIR_UP },
+! 	{ ControlMask,  XK_Up,            g_scroll_screen,      DIR_UP },
+! 	{ ControlMask,  XK_l,             g_scroll_screen,      DIR_RIGHT },
+! 	{ ControlMask,  XK_Right,         g_scroll_screen,      DIR_RIGHT },
+  	{ 0,            XK_plus,          g_zoom,               +1 },
+--- 93,98 ----
+  	{ 0,            XK_D,             g_remove_image,       None },
+! 	{ ShiftMask,    XK_Left,          g_scroll_screen,      DIR_LEFT },
+! 	{ ShiftMask,    XK_Down,          g_scroll_screen,      DIR_DOWN },
+! 	{ ShiftMask,    XK_Up,            g_scroll_screen,      DIR_UP },
+! 	{ ShiftMask,    XK_Right,         g_scroll_screen,      DIR_RIGHT },
+  	{ 0,            XK_plus,          g_zoom,               +1 },
+*************** static const keymap_t keys[] = {
+*** 115,123 ****
+  
+- 	{ 0,            XK_h,             t_move_sel,           DIR_LEFT },
+  	{ 0,            XK_Left,          t_move_sel,           DIR_LEFT },
+- 	{ 0,            XK_j,             t_move_sel,           DIR_DOWN },
+  	{ 0,            XK_Down,          t_move_sel,           DIR_DOWN },
+- 	{ 0,            XK_k,             t_move_sel,           DIR_UP },
+  	{ 0,            XK_Up,            t_move_sel,           DIR_UP },
+- 	{ 0,            XK_l,             t_move_sel,           DIR_RIGHT },
+  	{ 0,            XK_Right,         t_move_sel,           DIR_RIGHT },
+--- 111,115 ----
+*************** static const keymap_t keys[] = {
+*** 125,132 ****
+  
+! 	{ 0,            XK_n,             i_navigate,           +1 },
+  	{ 0,            XK_n,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
+! 	{ 0,            XK_space,         i_navigate,           +1 },
+! 	{ 0,            XK_p,             i_navigate,           -1 },
+  	{ 0,            XK_p,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
+! 	{ 0,            XK_BackSpace,     i_navigate,           -1 },
+  	{ 0,            XK_bracketright,  i_navigate,           +10 },
+--- 117,124 ----
+  
+! 	{ 0,            XK_x,             i_navigate,           +1 },
+  	{ 0,            XK_n,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
+! 	{ 0,            XK_Right,         i_navigate,           +1 },
+! 	{ 0,            XK_z,             i_navigate,           -1 },
+  	{ 0,            XK_p,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
+! 	{ 0,            XK_Left,	  i_navigate,           -1 },
+  	{ 0,            XK_bracketright,  i_navigate,           +10 },
+*************** static const keymap_t keys[] = {
+*** 136,147 ****
+  	{ ControlMask,  XK_p,             i_navigate_frame,     -1 },
+! 	{ ControlMask,  XK_space,         i_toggle_animation,   None },
+! 	{ ControlMask,  XK_a,             i_toggle_animation,   None },
+! 	{ 0,            XK_h,             i_scroll,             DIR_LEFT },
+! 	{ 0,            XK_Left,          i_scroll,             DIR_LEFT },
+! 	{ 0,            XK_j,             i_scroll,             DIR_DOWN },
+! 	{ 0,            XK_Down,          i_scroll,             DIR_DOWN },
+! 	{ 0,            XK_k,             i_scroll,             DIR_UP },
+! 	{ 0,            XK_Up,            i_scroll,             DIR_UP },
+! 	{ 0,            XK_l,             i_scroll,             DIR_RIGHT },
+! 	{ 0,            XK_Right,         i_scroll,             DIR_RIGHT },
+  	{ 0,            XK_H,             i_scroll_to_edge,     DIR_LEFT },
+--- 128,134 ----
+  	{ ControlMask,  XK_p,             i_navigate_frame,     -1 },
+! 	{ 0,		XK_space,         i_toggle_animation,   None },
+! 	{ ControlMask,  XK_Left,          i_scroll,             DIR_LEFT },
+! 	{ ControlMask, XK_Down,          i_scroll,             DIR_DOWN },
+! 	{ ControlMask,  XK_Up,            i_scroll,             DIR_UP },
+! 	{ ControlMask,  XK_Right,         i_scroll,             DIR_RIGHT },
+  	{ 0,            XK_H,             i_scroll_to_edge,     DIR_LEFT },
+*************** static const keymap_t keys[] = {
+*** 150,152 ****
+  	{ 0,            XK_L,             i_scroll_to_edge,     DIR_RIGHT },
+! 	{ 0,            XK_z,             i_scroll_to_center,   None },
+  	{ 0,            XK_equal,         i_set_zoom,           100 },
+--- 137,139 ----
+  	{ 0,            XK_L,             i_scroll_to_edge,     DIR_RIGHT },
+! 	{ 0,            XK_Z,             i_scroll_to_center,   None },
+  	{ 0,            XK_equal,         i_set_zoom,           100 },
+*************** static const button_t buttons_img[] = {
+*** 171,173 ****
+  	{ 0,            1,                i_cursor_navigate,    None },
+! 	{ ControlMask,  1,                i_drag,               DRAG_RELATIVE },
+  	{ 0,            2,                i_drag,               DRAG_ABSOLUTE },
+--- 158,160 ----
+  	{ 0,            1,                i_cursor_navigate,    None },
+! 	{ 0, 		1,                i_drag,               DRAG_RELATIVE },
+  	{ 0,            2,                i_drag,               DRAG_ABSOLUTE },
+Common subdirectories: nsxiv-30/examples and patched-nsxiv/examples
+Common subdirectories: nsxiv-30/icon and patched-nsxiv/icon
+diff -Np1 nsxiv-30/options.c patched-nsxiv/options.c
+*** nsxiv-30/options.c	2022-06-15 10:07:46.000000000 -0400
+--- patched-nsxiv/options.c	2023-01-19 15:37:27.637430015 -0500
+*************** void parse_options(int argc, char **argv
+*** 72,74 ****
+  	_options.zoom = 1.0;
+! 	_options.animate = false;
+  	_options.gamma = 0;
+--- 72,74 ----
+  	_options.zoom = 1.0;
+! 	_options.animate = true;
+  	_options.gamma = 0;

@@ -1,0 +1,27 @@
+# Template file for 'mkdocs'
+pkgname=mkdocs
+version=1.4.2
+revision=1
+build_helper="python3"
+hostmakedepends="hatchling python3-pathspec python3-build python3-installer
+ python3-wheel"
+depends="python3-Babel python3-click python3-dateutil python3-ghp-import
+ python3-importlib_metadata python3-Jinja2 python3-livereload python3-Markdown
+ python3-MarkupSafe python3-mdx-gh-links python3-mergedeep python3-packaging 
+ python3-pyyaml-env-tag python3-watchdog python3-yaml"
+short_desc="Project documentation with Markdown"
+maintainer="TezraDesu"
+license="BSD"
+homepage="https://www.mkdocs.org/"
+distfiles="https://github.com/${pkgname}/${pkgname}/archive/refs/tags/${version}.tar.gz"
+checksum=71dbd91520a405cce9c1e194b98adeab369aed81e60debc9ca1ffe72f2132632
+
+do_build() {
+	python3 -m build --wheel
+}
+
+do_install() {
+	python3 -m installer --destdir="${DESTDIR}" dist/*whl
+	install -Dm644 LICENSE -t "${DESTDIR}/usr/share/licenses/${pkgname}"
+
+}

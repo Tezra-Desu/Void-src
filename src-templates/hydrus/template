@@ -1,0 +1,53 @@
+# Template file for 'hydrus'
+pkgname=hydrus
+_pkgname=hydrus
+version=512
+revision=1
+build_helper="python3"
+patch_args="-Np1"
+hostmakedepends="git mkdocs mkdocs-material pymdown-extensions"
+makedepends="ffmpeg-devel"
+depends="libopencv-python3 python3-BeautifulSoup4 python3-yaml python3-lz4
+ python3-numpy python3-Twisted python3-Pillow python3-pysocks python3-psutil
+ python3-send2trash python3-html5lib python3-requests python3-QtPy python3-mpv
+ noto-fonts-emoji twemoji python3-service_identity fmt python3 python3-pyside2
+ ffmpeg python3-cloudscraper"
+short_desc="Danbooru-like image tagging and searching system for the desktop"
+maintainer="TezraDesu"
+license="WTFPL"
+homepage="http://hydrusnetwork.github.io/hydrus/"
+distfiles="https://github.com/hydrusnetwork/${_pkgname}/archive/v${version}.tar.gz"
+checksum=47bcac15261da8618ff3e87cb240d6f296d896185574013b4d6af0661bdb74b6
+
+
+do_build() {
+	mkdir "exfiles"
+   	git clone https://aur.archlinux.org/hydrus.git "exfiles/"
+	mv "exfiles/hydrus-client" ./
+	mv "exfiles/hydrus-server" ./
+	rm -rf "exfiles/"
+	rm -f "hydrus/Test"*.py
+   	rm -rf "static/testing"
+	python3 -OO -m compileall -fq .
+	mkdocs build -d help
+}
+
+do_install() {
+
+# Create /opt/hydrus and copy hydrus files to there
+	install -m755 -d "${DESTDIR}/opt/hydrus"
+	cp -r help hydrus static client.pyw server.py "${DESTDIR}/opt/hydrus/"
+                           
+# Create and populate /opt/hydrus/bin
+	install -d -m755 "${DESTDIR}/opt/hydrus/bin"
+	ln -s /usr/bin/ffmpeg "${DESTDIR}/opt/hydrus/bin/ffmpeg"
+
+# Install hydrus-client and hydrus-server executables
+	install -d -m755 "${DESTDIR}/usr/bin"
+	install -m755 hydrus-{client,server} "${DESTDIR}/usr/bin/"
+  
+# Install license files
+	install -d -m755 "${DESTDIR}/usr/share/licenses/${pkgname}"
+	install -m644 COPYING "${DESTDIR}/usr/share/licenses/${pkgname}/"
+	install -m644 license.txt "${DESTDIR}/usr/share/licenses/${pkgname}/"
+}

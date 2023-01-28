@@ -1,0 +1,23 @@
+# Template file for 'nhentai'
+pkgname=nhentai
+version=0.4.17
+revision=1
+build_helper="python3"
+hostmakedepends="python3-setuptools"
+depends="python3-requests python3-soupsieve python3-BeautifulSoup4 python3-tabulate
+ python3-future python3-iso8601"
+short_desc="CLI tool for downloading doujinshi from nhentai.net"
+maintainer="TezraDesu"
+license="MIT"
+homepage="https://github.com/RicterZ/${pkgname}/"
+distfiles="https://github.com/RicterZ/${pkgname}/archive/${version}.tar.gz"
+checksum=9946b1c929dee3933938c5a19e2c7d0d90ca641d3a891abe4985d8c8f045c1f7
+
+do_build() {
+	python3 setup.py build
+}
+
+do_install() {
+	python3 setup.py install --prefix=/usr --root="${DESTDIR}" --optimize=1
+}
+
