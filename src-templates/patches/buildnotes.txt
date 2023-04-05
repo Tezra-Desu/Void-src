@@ -1,9 +1,0 @@
-# Notes
-
-- update icu-devel to 72.1
-- add "libicudata.so.72 icu-libs-72.1_1" to common/shlibs
-	append other lines containing "icu-libs"
-- repackage icu-devel -> nodejs -> libxml2 -> libharfbuzz
-
-- create new masterdir with nightly rustup for firefox & ncspot
-- pkg firefox-devel
